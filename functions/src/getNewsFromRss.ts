@@ -1,7 +1,7 @@
 import * as functions from "firebase-functions";
 import RssParser = require("rss-parser");
 
-export default function getNewsDataFromRss(rssUrl: string, registeredUrls: string[]): Promise<any> {
+export default function getNewsFromRss(rssUrl: string, registeredUrls: string[]): Promise<any> {
   return new Promise((resolve, reject) => {
     // データ返却用の変数
     var data: { title: string; url: string; date: Date }[] = [];
@@ -30,7 +30,7 @@ export default function getNewsDataFromRss(rssUrl: string, registeredUrls: strin
           data.push({
             title: item.title as string,
             url: item.link as string,
-            date: new Date(Date.now() + (new Date().getTimezoneOffset() + 9 * 60) * 60 * 1000),
+            date: new Date(),
           });
         }
         resolve(data);
